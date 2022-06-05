@@ -8,13 +8,13 @@ namespace AddressBook
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Address Book Management System");
-            
+            //creating object for Address Book Class
             AddressBook addressBook = new AddressBook();
             bool flag = true;
 
             while (flag)
             {
-               
+                
                 Console.WriteLine("\nEnter 1 to add New Address Book ");
                 Console.WriteLine("Enter 2 to Add Contacts");
                 Console.WriteLine("Enter 3 to Edit Contacts");
@@ -25,6 +25,7 @@ namespace AddressBook
                 Console.WriteLine("Enter 8 to search Contact Details using state");
                 Console.WriteLine("Enter 9 to view contact details and count with city");
                 Console.WriteLine("Enter 10 to view contact details and count with state");
+                Console.WriteLine("Enter 11 to write contact details into text file");
                 Console.WriteLine("Enter any other key to exit");
 
 
@@ -33,19 +34,16 @@ namespace AddressBook
                 {
                     case "1":
                         addressBook.AddAdressBook();
-                        
+                        //addressBook.DisplayingAddressBooks(); 
                         break;
                     case "2":
                         addressBook.AddContactsInAddressBook();
-                        addressBook.DisplayingAddressBooks();
                         break;
                     case "3":
                         addressBook.EditDetailsOfAddressBook();
-                        addressBook.DisplayingAddressBooks();
                         break;
                     case "4":
                         addressBook.DeleteContactsOfAddressBook();
-                        addressBook.DisplayingAddressBooks();
                         break;
                     case "5":
                         addressBook.DisplayingAddressBooks();
@@ -68,6 +66,10 @@ namespace AddressBook
                         addressBook.GettingStateNames();
                         addressBook.CreatingStateDictionary();
                         addressBook.ViewingStateDictionary();
+                        break;
+                    case "11":
+                        addressBook.WritingAddressBookInTextFile();
+                        addressBook.ReadingContactDetailsFromTextFile();
                         break;
                     default:
                         flag = false;

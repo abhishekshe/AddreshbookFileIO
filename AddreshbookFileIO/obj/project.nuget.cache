@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "dgSpecHash": "J1rXGytjRL10YoIk5o3OxWmfJsXpRVff4uXa9DXElSf44/rf6uoge0w73X+fYagUVrCybNs8HfrSO7TlnSO/nw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\abhis\\source\\repos\\AddreshbookFileIO\\AddreshbookFileIO\\AddreshbookFileIO.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\5.0.0\\microsoft.extensions.configuration.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\5.0.0\\microsoft.extensions.dependencyinjection.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.logging\\5.0.0\\microsoft.extensions.logging.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\5.0.0\\microsoft.extensions.logging.abstractions.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.options\\5.0.0\\microsoft.extensions.options.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\microsoft.extensions.primitives\\5.0.0\\microsoft.extensions.primitives.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\nlog\\5.0.0\\nlog.5.0.0.nupkg.sha512",
+    "C:\\Users\\abhis\\.nuget\\packages\\nlog.extensions.logging\\5.0.0\\nlog.extensions.logging.5.0.0.nupkg.sha512"
+  ],
+  "logs": []
+}

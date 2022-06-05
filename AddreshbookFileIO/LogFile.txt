@@ -1,0 +1,5 @@
+﻿2022-06-05 15:23:51.9669|DEBUG|AddressBook.NLog|Contact Details Addition Successful: AddingContactDetails()
+2022-06-05 15:23:56.0229|INFO|AddressBook.NLog|No more contact details have been entered
+2022-06-05 15:23:56.0229|DEBUG|AddressBook.NLog|Displaying Contact Details Successful :DisplayingContactDetails()
+2022-06-05 15:23:56.0229|DEBUG|AddressBook.NLog|Displaying Contact Details Successful :DisplayingContactDetails()
+2022-06-05 15:23:56.0229|DEBUG|AddressBook.NLog|Displaying Contact Details Successful :DisplayingContactDetails()

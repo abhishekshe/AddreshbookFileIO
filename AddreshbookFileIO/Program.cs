@@ -64,11 +64,11 @@ namespace AddressBook
                         addressBook.CreatingCityDictionary();
                         addressBook.ViewingCityDictionary();
                         break;
-                    case "10":
-                        addressBook.GettingStateNames();
-                        addressBook.CreatingStateDictionary();
-                        addressBook.ViewingStateDictionary();
-                        break;
+                    //case "10":
+                    //    addressBook.GettingStateNames();
+                    //    addressBook.CreatingStateDictionary();
+                    //    addressBook.ViewingStateDictionary();
+                    //    break;
                     default:
                         flag = false;
                         break;

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.IO;
+using System.Globalization;
+using System.Linq;
 
 namespace AddressBook
 {
@@ -31,7 +33,7 @@ namespace AddressBook
             }
         }
 
-        
+       
         public void AddContactsInAddressBook()
         {
             Console.WriteLine("\nEnter Name of address book to add new contact");
@@ -79,7 +81,7 @@ namespace AddressBook
                 contactPersonInformation.DisplayContactDetails();
             }
         }
-        
+       
 
         public void DeleteContactsOfAddressBook()
         {
@@ -113,7 +115,7 @@ namespace AddressBook
                 contactPersonInformation.DisplayContactDetails();
             }
         }
-     
+        
         public void WritingAddressBookInTextFile()
         {
             //calling of addressbooks using foreach loop
@@ -124,11 +126,11 @@ namespace AddressBook
             }
             Console.WriteLine("Data Appended in text file");
         }
-
+    
         public void ReadingContactDetailsFromTextFile()
         {
             //path from which data is read
-            string path = @"C:\Users\vishu\source\repos\Address Book FileIO Day 20\Address Book FileIO Day 20\DataFile.txt";
+            string path = @"C:\Users\abhis\source\repos\AddreshbookFileIO\AddreshbookFileIO\Abhishek.csv";
             Console.WriteLine("Showing all the data Writtern into the file by calling Stream Reader");
            
             if (File.Exists(path))
@@ -143,7 +145,45 @@ namespace AddressBook
                 }
             }
         }
-      
+       
+        public void WritingAddressBookInCsvFile()
+        {
+            //calling of addressbooks using foreach loop
+            foreach (KeyValuePair<string, ContactPersonInformation> dictionaryPair in addressBookMapper)
+            {
+                ContactPersonInformation contactPersonInformation = dictionaryPair.Value;
+                contactPersonInformation.AddingContactDetailsInCsvFile(dictionaryPair.Key);
+            }
+            Console.WriteLine("Data Appended in csv file successfully");
+        }
+       
+        public void ReadingContactDetailsFromCSVFile()
+        {
+            Console.WriteLine("**Reading data from csv file**");
+            //iterating over each address book
+            foreach (KeyValuePair<string, ContactPersonInformation> addressBookName in addressBookMapper)
+            {
+                //defining path for each address book
+                string path = @"C:\Users\vishu\source\repos\Address Book FileIO Day 20\Address Book FileIO Day 20\ContactListCsv\" + addressBookName.Key + ".csv";
+                if (File.Exists(path))
+                {
+                    Console.WriteLine("The Name of the address book is:" + addressBookName.Key);
+                    //reading the path of file
+                    StreamReader reader = new StreamReader(path);
+                    //instatiating csvreader object to read csv file
+                    var csv = new CsvReader(reader, CultureInfo.InvariantCulture);
+                    //getting the list of contact details from file using GetRecords Method and type casting it to ContactDetails
+                    List<ContactDetails> list = csv.GetRecords<ContactDetails>().toList();
+                    foreach (ContactDetails contactPerson in list)
+                    {
+                        Console.WriteLine($"First Name : {contactPerson.firstName} || Last Name: {contactPerson.lastName} || Address: {contactPerson.address} || City: {contactPerson.city} || State: {contactPerson.state}|| zip: {contactPerson.zip} || Phone No: {contactPerson.phoneNo} || eMail: {contactPerson.eMail}");
+                    }
+                    //closing the csv reader for garbage collection
+                    reader.Close();
+                }
+            }
+        }
+        
         public void DeletingAddressBook()
         {
             Console.WriteLine("\nEnter Name of address book to delete ");
@@ -163,13 +203,13 @@ namespace AddressBook
                 addressBookMapper.Remove(name);
             }
         }
-        
+       
         public void SearchingByCity()
         {
             Console.WriteLine("Please enter the city");
             string searchCity = Console.ReadLine();
 
-            //foreach loop to print name of address book and pass address book value to contact person information class
+            
             foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
             {
                 Console.WriteLine("Name of the address book: " + keyValuePair.Key);
@@ -185,14 +225,14 @@ namespace AddressBook
             }
 
         }
-      
+        
         public void SearchingByState()
         {
-            //used to find custom exception, if state do not exist
+            
 
             Console.WriteLine("Please enter the state");
             string searchState = Console.ReadLine();
-            //foreach loop is used to print key for dictionary and pass the values of dictionary to contact person information class
+            
             foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
             {
                 Console.WriteLine("Name of the address book: " + keyValuePair.Key);
@@ -208,20 +248,20 @@ namespace AddressBook
             }
 
         }
-        
+       
         public void ViewingCityDictionary()
         {
             foreach (KeyValuePair<string, List<ContactDetails>> cityDetails in cityDetailsDictionary)
             {
                 Console.WriteLine(cityDetails.Key + ":");
-                //index is used to maintain count of each city
+                
                 int index = 0;
                 foreach (ContactDetails contactPerson in cityDetails.Value)
                 {
                     Console.WriteLine($"First Name : {contactPerson.firstName} || Last Name: {contactPerson.lastName} || Address: {contactPerson.address} || City: {contactPerson.city} || State: {contactPerson.state}|| zip: {contactPerson.zip} || Phone No: {contactPerson.phoneNo} || eMail: {contactPerson.eMail}");
                     index++;
                 }
-                //displays name of city and count of contact details
+                
                 Console.WriteLine($"Total no of contact details in {cityDetails.Key} are {index}");
                 Console.WriteLine("");
 
@@ -253,7 +293,7 @@ namespace AddressBook
             foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
             {
                 ContactPersonInformation contactPersonInformation = keyValuePair.Value;
-             
+                
                 foreach (string city in contactPersonInformation.GettingCityList())
                 {
                     cityList.Add(city);
@@ -263,10 +303,10 @@ namespace AddressBook
        
         public void CreatingCityDictionary()
         {
-            //foreach loop is used to iterate over city names in hashset citylist
+            
             foreach (string cityName in cityList)
             {
-                //list is defined of contact details for every new city
+                
                 List<ContactDetails> cityDetailsList = new List<ContactDetails>();
                 
                 foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
@@ -274,18 +314,18 @@ namespace AddressBook
                     ContactPersonInformation contactPersonInformation = keyValuePair.Value;
                     cityDetailsList = contactPersonInformation.AddingContactDetailsByCity(cityName, cityDetailsList);
                 }
-                //after iterating over all address books, city and city details list are added in dictionary
+                
                 cityDetailsDictionary.Add(cityName, cityDetailsList);
             }
         }
-       
+        
         public void GettingStateNames()
         {
-            //calling each address book
+           
             foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
             {
                 ContactPersonInformation contactPersonInformation = keyValuePair.Value;
-                
+              
                 foreach (string state in contactPersonInformation.GettingStateList())
                 {
                     stateList.Add(state);
@@ -300,13 +340,13 @@ namespace AddressBook
             {
                 //list is defined of contact details for every new city
                 List<ContactDetails> stateDetailsList = new List<ContactDetails>();
-               
+                
                 foreach (KeyValuePair<string, ContactPersonInformation> keyValuePair in addressBookMapper)
                 {
                     ContactPersonInformation contactPersonInformation = keyValuePair.Value;
                     stateDetailsList = contactPersonInformation.AddingContactDetailsByState(stateName, stateDetailsList);
                 }
-                //after iterating over all address books, city and city details list are added in dictionary
+                
                 stateDetailsDictionary.Add(stateName, stateDetailsList);
             }
         }

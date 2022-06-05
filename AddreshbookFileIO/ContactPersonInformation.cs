@@ -1,4 +1,5 @@
 ﻿using System.Globalization;
+using System.Text.Json;
 
 namespace AddressBook
 {
@@ -11,7 +12,7 @@ namespace AddressBook
         HashSet<string> stateList;
         private readonly NLog nLog = new NLog();
 
-      
+       
         public ContactPersonInformation()
         {
             contactDetailsList = new List<ContactDetails>();
@@ -24,16 +25,17 @@ namespace AddressBook
         public void AddingContactDetails()
         {
             ContactPersonInformation contactPersonalInformation = new ContactPersonInformation();
-          
+            
+                
 
             while (true)
             {
-            
+            //used goto method to call the method again
             Repeat: Console.WriteLine("Please enter first name, last name, address, city, state, zip, phoneno and email");
                 string firstName = Console.ReadLine();
                 if (firstName == "")
                 {
-                    
+                    //if first name is null, then no more contact details are entered
                     nLog.LogInfo("No more contact details have been entered");
                     break;
                 }
@@ -67,7 +69,7 @@ namespace AddressBook
             //sorting the values in the address book using lambda expression
 
         }
-       
+        
         public void DisplayContactDetails()
         {
             SortingContactDetails();
@@ -78,7 +80,7 @@ namespace AddressBook
             }
             nLog.LogDebug("Displaying Contact Details Successful :DisplayingContactDetails()");
         }
-
+       
         public void AddingContactDetailsinTextFile(string addressBookName)
         {
             string path = @"C:\Users\vishu\source\repos\Address Book FileIO Day 20\Address Book FileIO Day 20\DataFile.txt";
@@ -93,14 +95,15 @@ namespace AddressBook
                         sr.WriteLine($"First Name : {contactPerson.firstName} || Last Name: {contactPerson.lastName} || Address: {contactPerson.address} || City: {contactPerson.city} || State: {contactPerson.state}|| zip: {contactPerson.zip} || Phone No: {contactPerson.phoneNo} || eMail: {contactPerson.eMail}");
                     }
 
-                   
+                    
                     sr.Close();
                 }
             }
         }
-        
+     
         public void AddingContactDetailsInCsvFile(string addressBookName)
         {
+
             //giving path of the csv file with the help of address book name
             string path = @"C:\Users\vishu\source\repos\Address Book FileIO Day 20\Address Book FileIO Day 20\ContactListCsv\" + addressBookName + ".csv";
             //path for writing each csv file, is converted into stream
@@ -117,14 +120,29 @@ namespace AddressBook
             writer.Flush();
             
             writer.Close();
+
+        }
+        public void AddingContactDetailsInJsonFile(string addressBookName)
+        {
+            
+            string pathforJson = @"C:\Users\abhis\source\repos\AddreshbookFileIO\AddreshbookFileIO\Abhi.json" + addressBookName + ".json";
+            
+            StreamWriter writerJson = new StreamWriter(pathforJson);
+            
+            JsonSerializer serializer = new JsonSerializer();
+            JsonWriter sw = new JsonTextWriter(writerJson);
+            
+            serializer.Serialize(sw, contactDetailsList);
+            writerJson.Flush();
+            writerJson.Close();
         }
 
 
-        
+       
         public void EditingContactDetails()
         {
             ContactPersonInformation contact = new ContactPersonInformation();
-        
+       
         addingDetailsAgainForEditing: Console.WriteLine("Please help us, first identify you");
             Console.WriteLine("Please enter your first name and phone no");
             string firstNm = Console.ReadLine();
@@ -132,10 +150,10 @@ namespace AddressBook
             double mobileNo = Convert.ToDouble(Console.ReadLine());
             foreach (ContactDetails contactDetails in contactDetailsList)
             {
-                //using first name and mobile  no to verify contact person
+                
                 if (contactDetails.firstName == firstNm && contactDetails.phoneNo == mobileNo)
                 {
-                //asking user to input detail of what needs to be edited and forwarding the input to switch case.
+                
                 EditAgain: Console.WriteLine("please select the serial no. of field which you want to change\n 1. First name \n2.Last name\n3.Address\n4.City\n5.State\n6.Zip code\n7.Phone no.\n 8.email");
                     int inputForEditing = Convert.ToInt32(Console.ReadLine());
                     editCheck++;
@@ -340,10 +358,10 @@ namespace AddressBook
                     }
                 }
 
-                //ContactPersonInformation contact = new ContactPersonInformation();
+                
 
             }
-            //Console.WriteLine("Your input does not match our data");
+            
             if (editCheck == 0)
             {
                 Console.WriteLine("It looks like you are entering wrong details");
@@ -359,7 +377,7 @@ namespace AddressBook
                 goto addingDetailsAgainForEditing;
             }
         }
-       
+        
         public void DeletingContactDetails()
         {
         addingDetailsForDeleting: Console.WriteLine("Please help us, first identify you");
@@ -371,7 +389,7 @@ namespace AddressBook
             {
                 if (contactDetails.firstName == firstNm && contactDetails.phoneNo == mobileNo)
                 {
-                    
+                    //removing selected object of contact details from contact details list
                     contactDetailsList.Remove(contactDetails);
                     Console.WriteLine("deletion operation successful");
                     nLog.LogDebug("Deletion Operation Successful:DeletingContactDetails()");
@@ -380,7 +398,7 @@ namespace AddressBook
                 }
 
             }
-            
+            //Console.WriteLine("Your input does not match our data");
             if (index == 0)
             {
                 Console.WriteLine("It looks like you are entering wrong details");
@@ -401,7 +419,7 @@ namespace AddressBook
             }
 
         }
-       
+      
         public bool CheckingForNameinExistingContactList(List<ContactDetails> contactDetailsList, string firstName, string lastName)
         {
             foreach (ContactDetails contactDetail in contactDetailsList)
@@ -439,33 +457,33 @@ namespace AddressBook
             }
 
         }
-       
+        
         public void SearchingContactDetailsByState(string searchState)
         {
-            //index is used to check if state exist
+            
             int index = 0;
             foreach (ContactDetails contactPerson in contactDetailsList)
             {
                 if (contactPerson.state.Equals(searchState))
                 {
-                    //Displays details for particular state
+                    
                     Console.WriteLine($"First Name : {contactPerson.firstName} || Last Name: {contactPerson.lastName} || Address: {contactPerson.address} || City: {contactPerson.city} || State: {contactPerson.state}|| zip: {contactPerson.zip} || Phone No: {contactPerson.phoneNo} || eMail: {contactPerson.eMail}");
                     index++;
                 }
             }
             if (index == 0)
             {
-                //prints message
+                
                 Console.WriteLine("there is no state in this list with this name");
             }
         }
-       
+        
         public List<ContactDetails> AddingContactDetailsByCity(string cityName, List<ContactDetails> cityDetailsList)
         {
             
             foreach (ContactDetails contactPerson in contactDetailsList)
             {
-                //checks if city is there in list
+                
                 if (contactPerson.city.Equals(cityName))
                 {
                     cityDetailsList.Add(contactPerson);
@@ -473,7 +491,7 @@ namespace AddressBook
             }
             return cityDetailsList;
         }
-        
+    
         public HashSet<string> GettingCityList()
         {
            
@@ -483,13 +501,13 @@ namespace AddressBook
             }
             return cityList;
         }
-    
+        
         public List<ContactDetails> AddingContactDetailsByState(string stateName, List<ContactDetails> stateDetailsList)
         {
-          
+            
             foreach (ContactDetails contactPerson in contactDetailsList)
             {
-                //checks if state is there in list
+                
                 if (contactPerson.state.Equals(stateName))
                 {
                     stateDetailsList.Add(contactPerson);
@@ -500,7 +518,7 @@ namespace AddressBook
        
         public HashSet<string> GettingStateList()
         {
-    
+            
             foreach (ContactDetails contactPerson in contactDetailsList)
             {
                 stateList.Add(contactPerson.state);
@@ -537,20 +555,4 @@ namespace AddressBook
         }
     }
 
-    internal class CsvWriter
-    {
-        private StreamWriter writer;
-        private CultureInfo invariantCulture;
-
-        public CsvWriter(StreamWriter writer, CultureInfo invariantCulture)
-        {
-            this.writer = writer;
-            this.invariantCulture = invariantCulture;
-        }
-
-        internal void WriteRecords(List<ContactDetails> contactDetailsList)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

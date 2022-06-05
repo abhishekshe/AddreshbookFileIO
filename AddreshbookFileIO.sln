@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddreshbookFileIO", "AddreshbookFileIO\AddreshbookFileIO.csproj", "{180FC665-017E-4F06-BE7F-B21F3AB1192E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AddreshbookFileIO", "AddreshbookFileIO\AddreshbookFileIO.csproj", "{180FC665-017E-4F06-BE7F-B21F3AB1192E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestProject1", "TestProject1\TestProject1.csproj", "{3428A784-4C2D-4B24-8925-395BAE4502CC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{180FC665-017E-4F06-BE7F-B21F3AB1192E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{180FC665-017E-4F06-BE7F-B21F3AB1192E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{180FC665-017E-4F06-BE7F-B21F3AB1192E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3428A784-4C2D-4B24-8925-395BAE4502CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3428A784-4C2D-4B24-8925-395BAE4502CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3428A784-4C2D-4B24-8925-395BAE4502CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3428A784-4C2D-4B24-8925-395BAE4502CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
